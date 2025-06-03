@@ -9,3 +9,5 @@ print(df["category"].value_counts())
 df2 = df[["category", "location"]]
 print(df2[df2["category"]=="Switzerland"])
 print(df2[(df2["category"] == "Switzerland") & (df2["location"] == "switzerland")])
+
+print(df2[df2["category"]=="UK"])
