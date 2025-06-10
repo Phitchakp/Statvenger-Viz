@@ -5,3 +5,5 @@ import seaborn as sns
 
 df = pd.read_csv("ai_job_dataset.csv")
 print(df.info())
+
+print(df["salary_currency"].value_counts())
