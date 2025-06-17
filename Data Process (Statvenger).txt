@@ -1,0 +1,33 @@
+Data Process (Statvenger)
+
+Data Cleaning 
+ - Duplicated
+ - Missing
+ - outlier
+
+
+Presentation Graph
+ - Bar chart 	: mean_salary vs experience_level
+		: mean_salary vs job_title
+		: mean_salary vs education_reqried
+			{category bar cahrt}
+
+		: mean_yearexperience vs experience_level
+		: industry vs mean_salary // experience_level
+
+ - Scatter Plot	: yearexperience vs salary (Correlation)
+		
+ - 3D Isoserface : mean_salary vs experience_level vs company_size
+
+ - Pie chart 	: required_skill {vs experience}
+ 
+ - Bubble chart	: company_location (interactive click on the bubble)
+	+ New Variable = Continent for each country (Color = Continent)
+		: industry vs company_location
+		
+
+ - 		: experience_level vs employment_type
+
+ - Word Cloud	: job_title , company_name
+
+
