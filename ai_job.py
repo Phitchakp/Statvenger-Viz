@@ -2,6 +2,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from collections import Counter
+import matplotlib.pyplot as plt
+import plotly.express as px
+from wordcloud import WordCloud
+
 
 df = pd.read_csv("ai_job_dataset.csv")
 
@@ -35,6 +40,17 @@ print(df)
 
 
 ### Graph
+
+# WordCloud for Job Title
+text_a = ' '.join(df['job_title'])
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_a)
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.title('Word Cloud: Job Titles')
+plt.tight_layout()
+plt.show()
+
 
 # 1. Bar plot_A : mean_salary vs experience_level
 label_experience = {
@@ -203,6 +219,7 @@ skills_experience['experience_label'] = skills_experience['experience_level'].ma
 from collections import Counter
 import matplotlib.pyplot as plt
 
+
 # Combine all required skills into one list
 all_skills = ','.join(df['required_skills']).split(',')
 
@@ -336,28 +353,19 @@ fig.show()
 # plt.show()
 
 # 12. Word cloud : job_title, company_name
-from wordcloud import WordCloud
+# from wordcloud import WordCloud
 
-text = ' '.join(df['job_title']) + ' ' + ' '.join(df['company_name'])
+# text = ' '.join(df['job_title']) + ' ' + ' '.join(df['company_name'])
 
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+# wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
 
-plt.figure(figsize=(10, 5))
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis('off')
-plt.title('Word Cloud: Job Titles and Company Names')
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(10, 5))
+# plt.imshow(wordcloud, interpolation='bilinear')
+# plt.axis('off')
+# plt.title('Word Cloud: Job Titles and Company Names')
+# plt.tight_layout()
+# plt.show()
 
-
-text_a = ' '.join(df['job_title'])
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_a)
-plt.figure(figsize=(10, 5))
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis('off')
-plt.title('Word Cloud: Job Titles')
-plt.tight_layout()
-plt.show()
 
 
 text_b = ' '.join(df['company_name'])
