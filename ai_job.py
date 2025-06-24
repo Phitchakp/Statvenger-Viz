@@ -187,18 +187,18 @@ plt.show()
 skills_experience = df.groupby('experience_level')['required_skills'].apply(lambda x: ','.join(x)).reset_index()
 skills_experience['experience_label'] = skills_experience['experience_level'].map(label_experience)
 
-# Show pie for one experience level (e.g., Mid)
-from collections import Counter
+# # Show pie for one experience level (e.g., Mid)
+# from collections import Counter
 
-skills = ','.join(df[df['experience_level'] == 'MI']['required_skills']).split(',')
-skill_counts = Counter(skills)
-top_skills = dict(skill_counts.most_common(10))
+# skills = ','.join(df[df['experience_level'] == 'MI']['required_skills']).split(',')
+# skill_counts = Counter(skills)
+# top_skills = dict(skill_counts.most_common(10))
 
-plt.figure()
-plt.pie(top_skills.values(), labels=top_skills.keys(), autopct='%1.1f%%')
-plt.title('Top Skills for Mid-Level Experience')
-plt.tight_layout()
-plt.show()
+# plt.figure()
+# plt.pie(top_skills.values(), labels=top_skills.keys(), autopct='%1.1f%%')
+# plt.title('Top Skills for Mid-Level Experience')
+# plt.tight_layout()
+# plt.show()
 
 from collections import Counter
 import matplotlib.pyplot as plt
@@ -218,62 +218,62 @@ plt.tight_layout()
 plt.show()
 
 # 9. Bubble chart_A : company_location, + New Variable = Continent for each country (Color = Continent)
-from collections import Counter
-import matplotlib.pyplot as plt
-import seaborn as sns
+# from collections import Counter
+# import matplotlib.pyplot as plt
+# import seaborn as sns
 
-# Step 1: Define a simplified mapping from country code to continent
-continent_map = {
-    'US': 'North America', 'GB': 'Europe', 'CA': 'North America', 'IN': 'Asia',
-    'DE': 'Europe', 'FR': 'Europe', 'AU': 'Oceania', 'CN': 'Asia',
-    'BR': 'South America', 'JP': 'Asia', 'KE': 'Africa', 'NG': 'Africa',
-    'ZA': 'Africa', 'SG': 'Asia', 'NL': 'Europe'
-}
+# # Step 1: Define a simplified mapping from country code to continent
+# continent_map = {
+#     'US': 'North America', 'GB': 'Europe', 'CA': 'North America', 'IN': 'Asia',
+#     'DE': 'Europe', 'FR': 'Europe', 'AU': 'Oceania', 'CN': 'Asia',
+#     'BR': 'South America', 'JP': 'Asia', 'KE': 'Africa', 'NG': 'Africa',
+#     'ZA': 'Africa', 'SG': 'Asia', 'NL': 'Europe'
+# }
 
-# Step 2: Add a new column "continent" based on company_location
-df['continent'] = df['company_location'].map(continent_map).fillna('Other')
+# # Step 2: Add a new column "continent" based on company_location
+# df['continent'] = df['company_location'].map(continent_map).fillna('Other')
 
-# Step 3: Count job postings per location and continent
-loc_counts = df.groupby(['company_location', 'continent']).size().reset_index(name='count')
+# # Step 3: Count job postings per location and continent
+# loc_counts = df.groupby(['company_location', 'continent']).size().reset_index(name='count')
 
-# Step 4: Create bubble chart
-plt.figure(figsize=(12, 6))
-sns.scatterplot(
-    data=loc_counts,
-    x='company_location',
-    y='count',
-    size='count',
-    hue='continent',
-    sizes=(100, 1000),
-    alpha=0.7
-)
-plt.title('Job Postings by Company Location and Continent')
-plt.xlabel('Company Location')
-plt.ylabel('Number of Jobs')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
+# # Step 4: Create bubble chart
+# plt.figure(figsize=(12, 6))
+# sns.scatterplot(
+#     data=loc_counts,
+#     x='company_location',
+#     y='count',
+#     size='count',
+#     hue='continent',
+#     sizes=(100, 1000),
+#     alpha=0.7
+# )
+# plt.title('Job Postings by Company Location and Continent')
+# plt.xlabel('Company Location')
+# plt.ylabel('Number of Jobs')
+# plt.xticks(rotation=45)
+# plt.tight_layout()
+# plt.show()
 
 import plotly.express as px
 
-# Count jobs per country
-job_counts_by_country = df['company_location'].value_counts().reset_index()
-job_counts_by_country.columns = ['country_code', 'job_count']
+# # Count jobs per country
+# job_counts_by_country = df['company_location'].value_counts().reset_index()
+# job_counts_by_country.columns = ['country_code', 'job_count']
 
-# Choropleth map
-fig = px.choropleth(
-    job_counts_by_country,
-    locations='country_code',
-    color='job_count',
-    color_continuous_scale='Viridis',
-    title='Global Distribution of AI Jobs',
-    labels={'job_count': 'Number of Jobs'},
-    locationmode='ISO-3'  # ISO 2-letter or 3-letter codes — confirm your dataset format
-)
+# # Choropleth map
+# fig = px.choropleth(
+#     job_counts_by_country,
+#     locations='country_code',
+#     color='job_count',
+#     color_continuous_scale='Viridis',
+#     title='Global Distribution of AI Jobs',
+#     labels={'job_count': 'Number of Jobs'},
+#     locationmode='ISO-3'  # ISO 2-letter or 3-letter codes — confirm your dataset format
+# )
 
-fig.update_geos(showcoastlines=True, showland=True, showocean=True)
-fig.update_layout(margin={"r":0,"t":40,"l":0,"b":0})
-fig.show()
+# fig.update_geos(showcoastlines=True, showland=True, showocean=True)
+# fig.update_layout(margin={"r":0,"t":40,"l":0,"b":0})
+# fig.show()
 
 import plotly.express as px
 
@@ -287,44 +287,53 @@ fig = px.choropleth(
     locations='country',
     locationmode='country names',
     color='job_count',
-    color_continuous_scale='Viridis',
+    color_continuous_scale='Reds',
     title='Global Distribution of AI Jobs by Country',
     labels={'job_count': 'Number of Jobs'}
 )
 
-fig.update_geos(showcoastlines=True, showland=True, showocean=True)
-fig.update_layout(margin={"r":0,"t":40,"l":0,"b":0})
+fig.update_geos(
+    showcoastlines=True, 
+    showland=True, 
+    showocean=True,
+    landcolor='white',
+    showcountries=True,
+    countrycolor='lightgray'    
+    )
+fig.update_layout(margin={"r":0,"t":40,"l":0,"b":0},
+                  coloraxis_colorbar=dict(title='Jobs')
+                  )
 fig.show()
 
 
 # 10. Bubble chart_B : industry vs company_location
-industry_loc_counts = df.groupby(['industry', 'company_location']).size().reset_index(name='count')
+# industry_loc_counts = df.groupby(['industry', 'company_location']).size().reset_index(name='count')
 
-plt.figure(figsize=(14, 6))
-sns.scatterplot(
-    data=industry_loc_counts,
-    x='industry',
-    y='company_location',
-    size='count',
-    sizes=(20, 800),
-    alpha=0.6
-)
-plt.title('Job Count by Industry and Company Location')
-plt.xlabel('Industry')
-plt.ylabel('Company Location')
-plt.xticks(rotation=90)
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(14, 6))
+# sns.scatterplot(
+#     data=industry_loc_counts,
+#     x='industry',
+#     y='company_location',
+#     size='count',
+#     sizes=(20, 800),
+#     alpha=0.6
+# )
+# plt.title('Job Count by Industry and Company Location')
+# plt.xlabel('Industry')
+# plt.ylabel('Company Location')
+# plt.xticks(rotation=90)
+# plt.tight_layout()
+# plt.show()
 
 # 11. ??? : experience level vs employment_type
-plt.figure(figsize=(8, 5))
-sns.countplot(data=df, x='experience_level', hue='employment_type')
-plt.title('Experience Level vs Employment Type')
-plt.xlabel('Experience Level')
-plt.ylabel('Count')
-plt.legend(title='Employment Type')
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(8, 5))
+# sns.countplot(data=df, x='experience_level', hue='employment_type')
+# plt.title('Experience Level vs Employment Type')
+# plt.xlabel('Experience Level')
+# plt.ylabel('Count')
+# plt.legend(title='Employment Type')
+# plt.tight_layout()
+# plt.show()
 
 # 12. Word cloud : job_title, company_name
 from wordcloud import WordCloud
@@ -339,3 +348,24 @@ plt.axis('off')
 plt.title('Word Cloud: Job Titles and Company Names')
 plt.tight_layout()
 plt.show()
+
+
+text_a = ' '.join(df['job_title'])
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_a)
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.title('Word Cloud: Job Titles')
+plt.tight_layout()
+plt.show()
+
+
+text_b = ' '.join(df['company_name'])
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_b)
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.title('Word Cloud: Company Name')
+plt.tight_layout()
+plt.show()
+
